@@ -1,7 +1,7 @@
 # InternshipWala Backend Progress
 
-> Last Updated: 2026-07-02
-> Current Phase: Phase 9 — Course Module
+> Last Updated: 2026-07-03
+> Current Phase: Phase 8 — Public Website APIs
 
 ---
 
@@ -55,6 +55,20 @@ src/middlewares/security.js — Helmet, CORS, HPP, XSS
 # Completed Tasks
 
 ## Phase 7 (Phase 9 in original order) — User Profile Module
+
+## Phase 8 — Public Website APIs (Partial)
+
+- [x] `src/repositories/interfaces/ICourseRepository.js` — public course contract methods (list/count/detail/categories)
+- [x] `src/repositories/mocks/MockCourseRepository.js` — in-memory dataset + public course query implementations
+- [x] `src/validators/course.validator.js` — list query + course ID param validation schemas
+- [x] `src/services/course.service.js` — listPublic, getDetail, listCategories with pagination + output shaping
+- [x] `src/controllers/course.controller.js` — listPublic, getDetail, listCategories
+- [x] `src/routes/courses.routes.js` — public course endpoints wired with validation
+- [x] `src/routes/index.js` — mounted courses router at `/api/courses`
+- [x] Verified: `GET /api/courses` returns published mock courses with pagination meta
+- [x] Verified: `GET /api/courses/categories` returns active categories
+- [x] Verified: `GET /api/courses/:id` returns course + modules + duration fee options
+- [x] Verified: `npm run lint` passes with 0 errors
 
 - [x] Installed: multer, uuid
 - [x] `src/config/upload.js` — Multer disk storage; naming convention {fieldname}_{uuid}_{timestamp}.{ext}; file filters for photos (JPEG/PNG) and project files (PDF/ZIP/DOCX/JPEG/PNG); size limits from env

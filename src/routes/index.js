@@ -9,6 +9,7 @@ import { Router } from 'express';
 import authRouter from './auth.routes.js';
 import adminRouter from './admin/index.js';
 import userRouter from './user.routes.js';
+import coursesRouter from './courses.routes.js';
 
 const router = Router();
 
@@ -21,9 +22,11 @@ router.use('/admin', adminRouter);
 // ── User profile ──────────────────────────────────────────────────────────────
 router.use('/user', userRouter);
 
+// ── Public courses ────────────────────────────────────────────────────────────
+router.use('/courses', coursesRouter);
+
 // ── Future modules (added in later phases) ────────────────────────────────────
 // router.use('/user', userRouter);
-// router.use('/courses', coursesRouter);
 // router.use('/enrollments', enrollmentRouter);
 // router.use('/payments', paymentsRouter);
 // router.use('/certificates', certificatesRouter);
