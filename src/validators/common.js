@@ -20,6 +20,7 @@ import {
   CollabStatus,
   ContactStatus,
   HardcopyStatus,
+  PaymentStatus,
 } from '../constants/enums.js';
 
 // ── Primitives ────────────────────────────────────────────────────────────────
@@ -196,6 +197,11 @@ export const zContactStatus = z.enum(
 export const zHardcopyStatus = z.enum(
   Object.values(HardcopyStatus),
   { errorMap: () => ({ message: `Status must be one of: ${Object.values(HardcopyStatus).join(', ')}.` }) }
+);
+
+export const zPaymentStatus = z.enum(
+  Object.values(PaymentStatus),
+  { errorMap: () => ({ message: `Status must be one of: ${Object.values(PaymentStatus).join(', ')}.` }) }
 );
 
 // ── Reusable object shapes ────────────────────────────────────────────────────

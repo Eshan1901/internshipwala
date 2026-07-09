@@ -27,6 +27,12 @@ import asyncHandler from '../../utils/asyncHandler.js';
 import { AppError } from '../../utils/AppError.js';
 import { PERMISSIONS } from '../../constants/permissions.js';
 import { ROLES } from '../../constants/roles.js';
+import adminNotificationsRouter from './notifications.routes.js';
+import adminEnrollmentsRouter from './enrollments.routes.js';
+import adminPaymentsRouter from './payments.routes.js';
+import adminCertificatesRouter from './certificates.routes.js';
+import adminBlogRouter from './blog.routes.js';
+import adminJobsRouter from './jobs.routes.js';
 
 import {
   createAdminSchema,
@@ -136,5 +142,23 @@ router.get(
   validate(listActivityLogsQuerySchema, 'query'),
   asyncHandler(adminController.getActivityLogs)
 );
+
+// ── Admin notifications sub-router ────────────────────────────────────────────
+router.use('/notifications', adminNotificationsRouter);
+
+// ── Admin enrollments sub-router ──────────────────────────────────────────────
+router.use('/enrollments', adminEnrollmentsRouter);
+
+// ── Admin payments sub-router ─────────────────────────────────────────────────
+router.use('/payments', adminPaymentsRouter);
+
+// ── Admin certificates sub-router ────────────────────────────────────────────
+router.use('/certificates', adminCertificatesRouter);
+
+// ── Admin blog sub-router ─────────────────────────────────────────────────────
+router.use('/blog', adminBlogRouter);
+
+// ── Admin jobs sub-router ─────────────────────────────────────────────────────
+router.use('/jobs', adminJobsRouter);
 
 export default router;

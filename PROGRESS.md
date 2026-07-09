@@ -1,7 +1,7 @@
 # InternshipWala Backend Progress
 
-> Last Updated: 2026-07-03
-> Current Phase: Phase 8 — Public Website APIs
+> Last Updated: 2026-07-09
+> Current Phase: Phase 15 — CMS Module
 
 ---
 
@@ -18,13 +18,13 @@
 | Phase 7 – Admin Authentication & RBAC | ✅ Complete | 100% |
 | Phase 8 – Public Website APIs | 🔄 In Progress | 10% |
 | Phase 9 – Student Module | ✅ Complete | 100% |
-| Phase 10 – Course Module | ⏳ Pending | 0% |
-| Phase 11 – Enrollment Module | ⏳ Pending | 0% |
-| Phase 12 – Payment Module | ⏳ Pending | 0% |
-| Phase 13 – Certificate Module | ⏳ Pending | 0% |
-| Phase 14 – CMS & Content Management | ⏳ Pending | 0% |
+| Phase 10 – Course Module | ✅ Complete | 100% |
+| Phase 11 – Enrollment Module | ✅ Complete | 100% |
+| Phase 12 – Payment Module | ✅ Complete | 100% |
+| Phase 13 – Certificate Module | ✅ Complete (partial) | 85% |
+| Phase 14 – CMS & Content Management | ✅ Complete | 100% |
 | Phase 15 – Admin Dashboard | ⏳ Pending | 0% |
-| Phase 16 – Notification System | ⏳ Pending | 0% |
+| Phase 9 – Notification System | ✅ Complete | 100% |
 | Phase 17 – Testing | ⏳ Pending | 0% |
 | Phase 18 – Prisma Integration | ⏳ Pending | 0% |
 | Phase 19 – Production Readiness | ⏳ Pending | 0% |
@@ -53,6 +53,92 @@ src/middlewares/security.js — Helmet, CORS, HPP, XSS
 ---
 
 # Completed Tasks
+
+## Phase 14 — Jobs Module
+
+- [x] `src/repositories/interfaces/IJobRepository.js` — 13 method contracts for job_listings + job_applications
+- [x] `src/validators/job.validator.js` — listJobsQuerySchema, adminListJobsQuerySchema, createJobSchema, updateJobSchema (.strict + .refine), applyJobSchema, jobIdParamSchema, applicantsQuerySchema
+- [x] `src/services/job.service.js` — listPublic (expired filter via deadline), getById, apply (ownership uniqueness check), adminList, adminCreate, adminUpdate, adminDelete (soft), adminListApplicants
+- [x] `src/controllers/job.controller.js` — 8 thin handlers
+- [x] `src/routes/jobs.routes.js` — GET /, GET /:id (public); POST /:id/apply (Student JWT)
+- [x] `src/routes/admin/jobs.routes.js` — GET /, POST / (MANAGE_JOB_LISTINGS); GET /:id/applicants; PUT /:id, DELETE /:id (MANAGE_JOB_LISTINGS); /:id/applicants before /:id
+- [x] `src/routes/index.js` — jobsRouter + blogRouter both mounted
+- [x] `src/routes/admin/index.js` — adminJobsRouter mounted at /jobs
+- [x] Business rules: expired listings hidden (deadline col), one application per student (app-layer check), soft-delete only
+- [x] Clarification recorded: §3.10 says "expires_at" but §5.20 column is "deadline DATE" — implementation uses deadline
+- [x] All 8 routes verified (public/student routes reach service; admin routes return 401)
+- [x] npm run lint — 0 errors
+
+## Phase 13 — Blog Module
+
+- [x] `src/repositories/interfaces/IBlogRepository.js` — 12 method contracts covering blog_posts and blog_categories
+- [x] `src/validators/blog.validator.js` — createPostSchema, updatePostSchema (.strict + .refine), createCategorySchema, listBlogQuerySchema, blogIdParamSchema, blogSlugParamSchema, adminListBlogQuerySchema
+- [x] `src/services/blog.service.js` — listPublic, getBySlug, listCategories, adminList, adminCreate (slug auto-gen + app-layer uniqueness check), adminUpdate (slug preserved unless explicitly provided; published_at first-publish rule), adminDelete (soft-delete), adminCreateCategory
+- [x] `src/controllers/blog.controller.js` — 8 handlers, zero business logic
+- [x] `src/routes/blog.routes.js` — 3 public routes, no auth; /categories before /:slug
+- [x] `src/routes/admin/blog.routes.js` — 5 admin routes; MANAGE_BLOG permission; /categories before /:id
+- [x] `src/routes/index.js` — blogRouter mounted at /blog
+- [x] `src/routes/admin/index.js` — adminBlogRouter mounted at /blog
+- [x] Business rules: published-only public listing, slug auto-gen, published_at first-publish, slug-on-update preserved unless supplied, app-layer uniqueness check before insert/update
+- [x] slugify() utility reused from Phase 2
+- [x] npm run lint — 0 errors
+- [x] All 8 routes verified (public routes reach service layer; admin routes return 401)
+
+## Phase 12 — Certificate Module
+
+### Completed
+- [x] `src/repositories/interfaces/ICertificateRepository.js` — 10 method contracts
+- [x] `src/validators/certificate.validator.js` — 5 schemas
+- [x] `src/services/certificate.service.js` — generateCertificate (with retry loop), approveCertificate, verifyCertificate, myCertificates, getCertificateForDownload, listAdmin, updateHardCopyStatus
+- [x] `src/controllers/certificate.controller.js` — 6 handlers
+- [x] `src/routes/certificates.routes.js` — mine, verify (public), download
+- [x] `src/routes/admin/certificates.routes.js` — list, approve, hard-copy status update
+- [x] `src/services/enrollment.service.js` — CertificateService injected as 5th param; generateCertificate() called in completion branch
+- [x] `src/routes/enrollment.routes.js` and `admin/enrollments.routes.js` — DI updated with CertificateService
+- [x] `src/routes/index.js` — certificatesRouter mounted at /certificates
+- [x] `src/routes/admin/index.js` — adminCertificatesRouter mounted at /certificates
+- [x] Certificate numbering: exact documented algorithm (§18.7) using existing certNumber.js utilities
+- [x] Notifications: generation → "Certificate Being Prepared" (§15.3), approval → "Certificate Ready" (§15.4)
+- [x] No circular dependencies: CertificateService does not depend on EnrollmentService
+- [x] npm run lint — 0 errors
+
+### Deferred to Phase 15 — Hard Copy Request Endpoint
+- ⏳ `POST /api/certificates/:id/hard-copy` — NOT registered, NOT partially implemented
+- Reason: §5.5 requires `hard_copy_fee` from the `settings` table
+- Dependency: `ISettingsRepository` (available in Phase 15 — CMS Module)
+- DB constraint: `shipping_fee NUMERIC(8,2) NOT NULL` — no default can be used
+- Reference: Backend-Architecture.md §5.5, Database-Design.md §5.19
+- Action in Phase 15: add `createHardCopyRequest` to ICertificateRepository, implement `requestHardCopy` in service/controller/route
+
+## Phase 11 — Payment Module
+
+- [x] `src/repositories/interfaces/IPaymentRepository.js` — 9 method contracts; `confirmPayment()` and `createRefund()` carry explicit transaction boundary documentation per §16.2
+- [x] `src/validators/common.js` — added `zPaymentStatus` primitive + `PaymentStatus` import
+- [x] `src/validators/payment.validator.js` — myPaymentsQuerySchema, adminListPaymentsQuerySchema, confirmPaymentSchema (gateway_txn_id 3–200 chars per §9.5), refundSchema (reason 10–500 chars per §9.5), paymentIdParamSchema
+- [x] `src/services/payment.service.js` — myPayments, adminList, confirmPayment (single atomic repo call per §16.2), rejectPayment, initiateRefund (both eligibility rules + single atomic repo call per §6.5)
+- [x] `src/controllers/payment.controller.js` — 5 thin handlers, zero business logic
+- [x] `src/routes/payments.routes.js` — GET /mine behind authenticate
+- [x] `src/routes/admin/payments.routes.js` — list (any admin), confirm/reject (APPROVE_PAYMENTS), refund (PROCESS_REFUNDS)
+- [x] `src/routes/index.js` — paymentsRouter mounted at /payments
+- [x] `src/routes/admin/index.js` — adminPaymentsRouter mounted at /payments
+- [x] Transaction boundary: confirmPayment() is one repo call; DB developer owns atomicity
+- [x] No EnrollmentService coupling; IEnrollmentRepository not imported into PaymentService
+- [x] One notification per event: confirm → "Course Access Activated", reject → "Payment Rejected"
+- [x] Verified: all 5 routes return 401 without valid token
+- [x] npm run lint — 0 errors
+
+## Phase 9 — Notification System
+
+- [x] `src/repositories/interfaces/INotificationRepository.js` — 6 method contracts: create, listByUser, countByUser, findById, markRead, markAllRead
+- [x] `src/validators/notification.validator.js` — listNotificationsQuerySchema, notificationIdParamSchema, adminSendNotificationSchema
+- [x] `src/services/notification.service.js` — send, listForUser (paginated), markRead (with ownership check), markAllRead, adminSend
+- [x] `src/controllers/notification.controller.js` — 4 handlers: list, markRead, markAllRead, adminSend
+- [x] `src/routes/notifications.routes.js` — 3 student routes behind authenticate; /read-all registered before /:id/read
+- [x] `src/routes/admin/notifications.routes.js` — POST /send behind authorizePermission(SEND_NOTIFICATIONS)
+- [x] `src/routes/index.js` — notificationsRouter mounted at /notifications
+- [x] `src/routes/admin/index.js` — adminNotificationsRouter mounted at /notifications
+- [x] Verified: all 4 routes return 401 without valid token
+- [x] npm run lint — 0 errors
 
 ## Phase 7 (Phase 9 in original order) — User Profile Module
 
