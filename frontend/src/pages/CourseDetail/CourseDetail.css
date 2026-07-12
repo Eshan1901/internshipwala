@@ -1,0 +1,343 @@
+.course-detail-page {
+  padding-top: calc(var(--navbar-height) + var(--space-xl));
+  min-height: 80vh;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-xl);
+  transition: all var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-primary-light);
+  transform: translateX(-4px);
+}
+
+.course-detail-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  text-align: center;
+  padding: var(--space-4xl) 0;
+}
+
+/* Course Hero Layout */
+.course-detail-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: var(--space-3xl);
+  padding: var(--space-3xl);
+  margin-bottom: var(--space-3xl);
+  align-items: center;
+}
+
+.course-detail-hero__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-detail-hero__category {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.course-detail-hero__title {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+
+.course-detail-hero__desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+}
+
+.course-detail-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Purchase / Action Card */
+.course-purchase-card {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  border-left: 4px solid var(--color-accent);
+}
+
+.course-purchase-card__header h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+
+.course-purchase-card__header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.duration-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.duration-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.duration-option:hover {
+  background: var(--bg-input-focus);
+  border-color: var(--border-strong);
+}
+
+.duration-option--active {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-glow);
+}
+
+.duration-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.duration-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-accent-light);
+}
+
+.purchase-price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.price-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.price-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.btn-block {
+  width: 100%;
+  text-align: center;
+}
+
+.purchase-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.purchase-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.purchase-feature svg {
+  color: var(--color-primary-light);
+}
+
+/* Secondary Details Grid */
+.course-detail-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: var(--space-3xl);
+}
+
+.section-subtitle-left {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xl);
+}
+
+.modules-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.module-item {
+  padding: var(--space-lg);
+  border-left: 3px solid var(--color-primary);
+}
+
+.module-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.module-number {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+}
+
+.module-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  flex: 1;
+  min-width: 200px;
+}
+
+.module-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.syllabus-section {
+  padding: var(--space-xl);
+}
+
+.syllabus-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-md);
+}
+
+.syllabus-section p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Sidebar Styling */
+.course-outcomes-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.outcomes-card {
+  padding: var(--space-xl);
+}
+
+.outcomes-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-sm);
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.skill-tag {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+}
+
+.skill-check {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.tool-badge {
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.outcomes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.outcomes-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.outcome-icon {
+  color: var(--color-primary-light);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+@media (max-width: 960px) {
+  .course-detail-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .course-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .course-detail-hero {
+    padding: var(--space-lg);
+  }
+
+  .course-detail-hero__badges {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

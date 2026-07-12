@@ -1,0 +1,805 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+   Redesigned InternshipWALA Homepage CSS (Light Mode)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Hero Section ───────────────────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  padding-top: calc(var(--navbar-height) + var(--space-2xl));
+  padding-bottom: var(--space-4xl);
+  background: radial-gradient(circle at 10% 20%, rgba(15, 118, 110, 0.04) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.04) 0%, transparent 40%);
+  overflow: hidden;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background: var(--color-primary-glow);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-full);
+  font-size: 0.825rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  border: 1px solid rgba(15, 118, 110, 0.15);
+}
+
+.hero-badge svg {
+  color: var(--color-accent);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.hero-title .highlight-text {
+  color: var(--color-primary);
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+  max-width: 580px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.hero-actions .btn {
+  padding: 0.875rem 2.25rem;
+}
+
+.hero-checklists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.check-item svg {
+  color: var(--color-primary);
+}
+
+/* Hero Visual */
+.illustration-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 380px;
+}
+
+.hero-illustration {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.circle-bg {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(249, 115, 22, 0.05));
+  filter: blur(10px);
+}
+
+.student-graphic {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border-subtle);
+}
+
+.graphic-laptop {
+  color: var(--color-primary);
+}
+
+.graphic-charts {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-top: 15px;
+  height: 40px;
+}
+
+.graphic-charts .bar {
+  width: 12px;
+  border-radius: 3px 3px 0 0;
+  background: #cbd5e1;
+  transition: height 1s ease-out;
+}
+
+.graphic-charts .bar-1 { height: 25px; background: var(--color-primary-light); }
+.graphic-charts .bar-2 { height: 35px; background: var(--color-accent); }
+.graphic-charts .bar-3 { height: 18px; background: var(--color-secondary-light); }
+
+.floating-bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-students {
+  top: 15%;
+  left: 5%;
+  animation-delay: 0.5s;
+}
+
+.card-placement {
+  bottom: 15%;
+  right: 5%;
+  animation-delay: 1.5s;
+}
+
+/* ── 2. Trust Bar / Stats ────────────────────────────────────────────────── */
+.trust-bar-section {
+  padding-bottom: var(--space-4xl);
+}
+
+.stats-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.stat-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+}
+
+.stat-icon-wrapper.star-color {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--color-accent);
+}
+
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.partner-badges-wrapper {
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-xl);
+}
+
+.partner-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.partner-badges-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.accreditation-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #64748b;
+  padding: 0.35rem 1rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-sm);
+  background: #f8fafc;
+}
+
+/* ── 3. Departments Section ──────────────────────────────────────────────── */
+.departments-section {
+  background: #f1f5f9; /* Soft contrast background */
+}
+
+.departments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.department-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dept-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-md);
+}
+
+.dept-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  color: var(--text-primary);
+}
+
+.dept-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+  flex: 1;
+}
+
+.dept-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  transition: all var(--transition-fast);
+}
+
+.department-card:hover .dept-card-link {
+  color: var(--color-accent);
+  gap: 0.5rem;
+}
+
+/* ── 4. Featured Programs ────────────────────────────────────────────────── */
+.featured-grid-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+
+.view-all-row {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-2xl);
+}
+
+/* ── 5. Offline Promo Banner ─────────────────────────────────────────────── */
+.promo-banner-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-2xl);
+  background: linear-gradient(135deg, #0f766e, #1e3a8a);
+  color: white;
+  padding: var(--space-2xl);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.promo-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.promo-title {
+  color: white;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: var(--space-md);
+}
+
+.promo-desc {
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+  max-width: 580px;
+}
+
+.fee-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--space-xl);
+  max-width: fit-content;
+}
+
+.fee-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--color-accent-light);
+  line-height: 1.1;
+}
+
+.fee-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.fee-divider {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.promo-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.promo-banner-features {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xl);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: var(--space-xl);
+}
+
+.feature-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.feature-row svg {
+  color: var(--color-accent-light);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.feature-row h4 {
+  color: white;
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+}
+
+.feature-row p {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+/* ── 6. Why Internship Matters ───────────────────────────────────────────── */
+.why-matters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-xl);
+}
+
+.why-matters-card {
+  padding: var(--space-lg);
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.why-matters-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.matters-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+  border-radius: 50%;
+  margin-bottom: var(--space-md);
+}
+
+.matters-card-title {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.matters-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ── 7. Testimonials ─────────────────────────────────────────────────────── */
+.testimonials-section {
+  background: #f8fafc;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.testi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-md);
+}
+
+.testi-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-size: 1.1rem;
+}
+
+.testi-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.testi-college {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.testi-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.star-filled {
+  color: var(--color-accent);
+}
+
+.testi-quote {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── 8. Comparison Section ───────────────────────────────────────────────── */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 1.25rem var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.comparison-table th {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  background: #f8fafc;
+  color: var(--text-primary);
+}
+
+.comparison-table td {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.comparison-table td.feat-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table .highlight-column {
+  background: var(--color-primary-glow);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.comparison-table .verified-check {
+  color: var(--color-primary-dark);
+}
+
+/* ── 9. Enquiry Section ──────────────────────────────────────────────────── */
+.enquiry-section {
+  background: #f1f5f9;
+}
+
+.enquiry-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-3xl);
+  padding: var(--space-3xl);
+  background: white;
+}
+
+.enquiry-info-column h2 {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+}
+
+.enquiry-info-column p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+
+.advice-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.adv-point {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.adv-point svg {
+  color: var(--color-success);
+}
+
+.enquiry-form-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.form-empty-state {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.success-icon-box {
+  color: var(--color-success);
+  margin-bottom: var(--space-md);
+}
+
+.form-empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.form-empty-state p {
+  font-size: 0.95rem;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── 10. Final CTA Section ───────────────────────────────────────────────── */
+.final-cta-section {
+  padding: var(--space-4xl) 0;
+  text-align: center;
+}
+
+.final-cta-card {
+  background: linear-gradient(135deg, var(--color-primary-dark), #0d2e2b);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl);
+  color: white;
+  box-shadow: var(--shadow-xl);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.final-cta-card h2 {
+  color: white;
+  font-size: 2.25rem;
+  margin-bottom: var(--space-md);
+}
+
+.final-cta-card p {
+  color: #b2dfdb;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-2xl);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── 11. Sticky WhatsApp Button ────────────────────────────────────────── */
+.sticky-whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.sticky-whatsapp-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  color: white;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-actions, .hero-checklists {
+    justify-content: center;
+  }
+  
+  .illustration-container {
+    height: 300px;
+  }
+  
+  .stats-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .promo-banner-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .promo-banner-features {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: var(--space-xl);
+  }
+  
+  .enquiry-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .fee-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .fee-divider {
+    display: none;
+  }
+}
