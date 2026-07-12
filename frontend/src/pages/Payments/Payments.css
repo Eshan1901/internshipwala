@@ -1,0 +1,76 @@
+.payments-page { padding-top: 6rem; min-height: 100vh; }
+
+.payment-summary-card {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-primary);
+}
+.summary-label { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.2rem; }
+.summary-value { font-size: 1.4rem; font-weight: 800; color: var(--color-text); }
+
+.payments-table-wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.payments-table thead tr {
+  background: rgba(255,255,255,0.05);
+}
+.payments-table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.payments-table td {
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.payments-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.amount-cell { font-weight: 700; }
+.course-name-cell { max-width: 250px; }
+.mode-cell { color: var(--color-text-muted); }
+
+.empty-state, .pagination-row, .page-indicator, .empty-icon, .badge-danger {
+  /* inherited from Enrollments.css via shared index.css variables */
+}
+
+.pagination-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.page-indicator { font-size: 0.9rem; color: var(--color-text-muted); }
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.empty-icon { color: var(--color-primary); opacity: 0.6; }
+.empty-state h3 { font-size: 1.4rem; font-weight: 700; color: var(--color-text); }
+.empty-state p { color: var(--color-text-muted); }
+.badge-danger { background: rgba(239, 68, 68, 0.15); color: #ef4444; }

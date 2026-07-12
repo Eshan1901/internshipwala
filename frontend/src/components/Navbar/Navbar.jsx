@@ -51,12 +51,20 @@ export default function Navbar() {
           >
             Internships
           </Link>
-          <a href="#departments" className="navbar__link" id="nav-departments">
-            Departments
-          </a>
-          <a href="#featured-programs" className="navbar__link" id="nav-programs">
-            Programs
-          </a>
+          <Link
+            to="/jobs"
+            className={`navbar__link ${location.pathname.startsWith('/jobs') ? 'navbar__link--active' : ''}`}
+            id="nav-jobs"
+          >
+            Jobs
+          </Link>
+          <Link
+            to="/blog"
+            className={`navbar__link ${location.pathname.startsWith('/blog') ? 'navbar__link--active' : ''}`}
+            id="nav-blog"
+          >
+            Blog
+          </Link>
           <a href="#why-choose-us" className="navbar__link" id="nav-about">
             Why Us
           </a>
@@ -132,6 +140,18 @@ export default function Navbar() {
                     <Link to="/dashboard" className="navbar__dropdown-item" id="nav-dashboard">
                       <User size={16} />
                       Dashboard
+                    </Link>
+                    <Link to="/enrollments" className="navbar__dropdown-item" id="nav-enrollments">
+                      <User size={16} />
+                      My Enrollments
+                    </Link>
+                    <Link to="/payments" className="navbar__dropdown-item" id="nav-payments">
+                      <User size={16} />
+                      My Payments
+                    </Link>
+                    <Link to="/certificates" className="navbar__dropdown-item" id="nav-certificates">
+                      <User size={16} />
+                      Certificates
                     </Link>
                     <button onClick={logout} className="navbar__dropdown-item navbar__dropdown-item--danger" id="nav-logout">
                       <LogOut size={16} />
