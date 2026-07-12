@@ -5,9 +5,9 @@ import userService from '../services/userService';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('iw_token'));
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({ id: 'dummy-student-id', full_name: 'Test Student', email: 'student@test.com' });
+  const [token, setToken] = useState('dummy-student-token');
+  const [loading, setLoading] = useState(false);
 
   const isAuthenticated = !!token && !!user;
 
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
         // ignore parse errors
       }
     }
-    loadUser();
+    // loadUser(); // Bypassed for Mock Mode
   }, [loadUser, token]);
 
   const login = async (credentials) => {

@@ -4,9 +4,9 @@ import adminService from '../services/adminService';
 const AdminAuthContext = createContext(null);
 
 export function AdminAuthProvider({ children }) {
-  const [admin, setAdmin] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('iw_admin_token'));
-  const [loading, setLoading] = useState(true);
+  const [admin, setAdmin] = useState({ id: 'dummy-admin-id', full_name: 'Super Admin', roles: ['super_admin'] });
+  const [token, setToken] = useState('dummy-admin-token');
+  const [loading, setLoading] = useState(false);
 
   const isAdminAuthenticated = !!token && !!admin;
 
@@ -31,7 +31,7 @@ export function AdminAuthProvider({ children }) {
     if (cached && token) {
       try { setAdmin(JSON.parse(cached)); } catch {}
     }
-    loadAdmin();
+    // loadAdmin(); // Bypassed for Mock Mode
   }, [loadAdmin, token]);
 
   const adminLogin = async (credentials) => {
