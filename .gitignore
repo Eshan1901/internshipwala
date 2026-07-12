@@ -1,22 +1,29 @@
 # Dependencies
 node_modules/
 
-# Environment variables — never commit real secrets
+# Frontend builds
+frontend/dist/
+
+# Environment variables
 .env
+.env.local
 
-# Runtime file uploads — gitignored; created at runtime by Multer
-uploads/profiles/*
-uploads/projects/*
-uploads/assignments/*
-uploads/certificates/*
-!uploads/profiles/.gitkeep
-!uploads/projects/.gitkeep
-!uploads/assignments/.gitkeep
-!uploads/certificates/.gitkeep
+# Runtime file uploads (backend)
+backend/uploads/profiles/*
+backend/uploads/projects/*
+backend/uploads/assignments/*
+backend/uploads/certificates/*
+!backend/uploads/profiles/.gitkeep
+!backend/uploads/projects/.gitkeep
+!backend/uploads/assignments/.gitkeep
+!backend/uploads/certificates/.gitkeep
 
-# Log files — created at runtime by Winston
-logs/*.log
-!logs/.gitkeep
+# Log files (backend)
+backend/logs/*.log
+!backend/logs/.gitkeep
+
+# Redundant nested clone directory
+internshipwala/
 
 # macOS
 .DS_Store
