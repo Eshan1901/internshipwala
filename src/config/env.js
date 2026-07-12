@@ -55,6 +55,18 @@ const envSchema = z.object({
 
   // ── Hard Copy Fee ─────────────────────────────────────────────────
   DEFAULT_HARD_COPY_FEE: z.coerce.number().positive().default(500),
+
+  // ── Cloud Storage (Optional) ──────────────────────────────────────
+  CLOUDINARY_CLOUD_NAME: z.string().optional(),
+  CLOUDINARY_API_KEY: z.string().optional(),
+  CLOUDINARY_API_SECRET: z.string().optional(),
+
+  // AWS S3 / R2 / Supabase
+  AWS_ACCESS_KEY_ID: z.string().optional(),
+  AWS_SECRET_ACCESS_KEY: z.string().optional(),
+  AWS_REGION: z.string().optional(),
+  AWS_S3_BUCKET: z.string().optional(),
+  AWS_S3_ENDPOINT: z.string().optional(),
 });
 
 /**

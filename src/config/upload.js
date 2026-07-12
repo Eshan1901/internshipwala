@@ -25,25 +25,9 @@ import { AppError } from '../utils/AppError.js';
 
 // ── Storage engines ───────────────────────────────────────────────────────────
 
-/**
- * Build a Multer disk storage engine for a given subdirectory.
- * @param {string} subDir - Subdirectory under uploads/ (e.g. 'profiles')
- * @returns {multer.StorageEngine}
- */
-const buildStorage = (subDir) =>
-  multer.diskStorage({
-    destination: (_req, _file, cb) => {
-      cb(null, path.join(env.UPLOAD_DIR, subDir));
-    },
-    filename: (_req, file, cb) => {
-      const ext = path.extname(file.originalname).toLowerCase();
-      // {fieldname}_{uuid}_{timestamp}.{ext}
-      const name = `${file.fieldname}_${uuidv4()}_${Date.now()}${ext}`;
-      cb(null, name);
-    },
-  });
+const storage = multer.memoryStorage();
 
-// ── File filters ──────────────────────────────────────────────────────────────
+// ── File Filters ──────────────────────────────────────────────────────────────
 
 /**
  * File filter for profile photos — JPEG and PNG only.
@@ -89,21 +73,21 @@ const MB = 1024 * 1024;
 
 /** Multer instance for profile photo uploads */
 export const profilePhotoUpload = multer({
-  storage: buildStorage('profiles'),
+  storage,
   fileFilter: profilePhotoFilter,
   limits: { fileSize: env.MAX_PROFILE_PHOTO_SIZE_MB * MB },
 });
 
 /** Multer instance for project file uploads */
 export const projectFileUpload = multer({
-  storage: buildStorage('projects'),
+  storage,
   fileFilter: projectFileFilter,
   limits: { fileSize: env.MAX_PROJECT_FILE_SIZE_MB * MB },
 });
 
 /** Multer instance for assignment file uploads */
 export const assignmentFileUpload = multer({
-  storage: buildStorage('assignments'),
+  storage,
   fileFilter: projectFileFilter,
   limits: { fileSize: env.MAX_PROJECT_FILE_SIZE_MB * MB },
 });

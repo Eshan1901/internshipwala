@@ -11,7 +11,7 @@ const userService = {
 
   async uploadPhoto(file) {
     const formData = new FormData();
-    formData.append('photo', file);
+    formData.append('profile_photo', file);
     return api.post('/user/profile/photo', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });

@@ -21,6 +21,7 @@ import { fileURLToPath } from 'url';
 import { AppError } from '../utils/AppError.js';
 import { MESSAGES } from '../constants/messages.js';
 import logger from '../logger/logger.js';
+import { storageService } from './storage.service.js';
 
 // Resolve the project root so we can compute relative upload URLs
 const __filename = fileURLToPath(import.meta.url);
@@ -99,35 +100,39 @@ export class UserService {
   /**
    * Persist the uploaded profile photo URL on the user record.
    *
-   * The `filePath` received from Multer is the absolute filesystem path.
-   * We convert it to a relative URL (/uploads/profiles/filename.jpg) so
-   * only the path stored in the database is portable across environments.
-   *
-   * From Backend-Architecture.md Section 10.3:
-   *   "The stored path in the database will be the relative URL:
-   *    /uploads/profiles/profile_xxx.jpg"
-   *
    * @param {string} userId
-   * @param {string} absoluteFilePath - Multer-assigned absolute path to the file
+   * @param {Express.Multer.File} file - Multer uploaded file
    * @returns {Promise<{ profile_photo_url: string }>}
    */
-  async updateProfilePhoto(userId, absoluteFilePath) {
+  async updateProfilePhoto(userId, file) {
     const user = await this.userRepo.findById(userId);
     if (!user) throw new AppError(404, MESSAGES.NOT_FOUND);
 
-    // Convert the absolute Multer path to a web-accessible relative URL.
-    // path.relative() computes the path from the project root to the file,
-    // giving us e.g. "uploads/profiles/profile_xxx.jpg".
-    // We prepend "/" to make it a root-relative URL served by Express static.
-    const relativeToRoot = path.relative(PROJECT_ROOT, absoluteFilePath);
-    // Normalise to forward slashes (path.relative uses OS separator on Windows)
-    const relativePath = '/' + relativeToRoot.split(path.sep).join('/');
+    const oldPhotoUrl = user.profile_photo_url;
 
-    await this.userRepo.update(userId, { profile_photo_url: relativePath });
+    // Upload new photo to configured storage provider
+    const newPhotoUrl = await storageService.uploadFile(
+      file.buffer,
+      file.originalname,
+      file.mimetype,
+      'profiles'
+    );
 
-    logger.info('Profile photo updated', { userId });
+    try {
+      await this.userRepo.update(userId, { profile_photo_url: newPhotoUrl });
 
-    return { profile_photo_url: relativePath };
+      // Clean up the old photo from storage if it exists
+      if (oldPhotoUrl) {
+        await storageService.deleteFile(oldPhotoUrl);
+      }
+
+      logger.info('Profile photo updated', { userId });
+      return { profile_photo_url: newPhotoUrl };
+    } catch (err) {
+      // Clean up the new photo in case DB update fails
+      await storageService.deleteFile(newPhotoUrl);
+      throw err;
+    }
   }
 
   // ── Private helpers ────────────────────────────────────────────────────────

@@ -11,7 +11,7 @@
  *   POST /api/user/profile/photo
  */
 
-import { unlink } from 'fs/promises';
+
 import { sendSuccess } from '../utils/response.js';
 import { MESSAGES } from '../constants/messages.js';
 import logger from '../logger/logger.js';
@@ -71,19 +71,9 @@ export class UserController {
     }
 
     try {
-      const result = await this.userService.updateProfilePhoto(req.user.id, req.file.path);
+      const result = await this.userService.updateProfilePhoto(req.user.id, req.file);
       return sendSuccess(res, 200, MESSAGES.PHOTO_UPLOADED, result);
     } catch (err) {
-      // Clean up the uploaded file so orphans do not accumulate on disk.
-      // Uses Promise-based unlink — errors are logged but never propagated.
-      try {
-        await unlink(req.file.path);
-      } catch (unlinkErr) {
-        logger.error('Failed to delete orphaned upload', {
-          path: req.file.path,
-          error: unlinkErr.message,
-        });
-      }
       return next(err);
     }
   };
