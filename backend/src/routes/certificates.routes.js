@@ -21,9 +21,9 @@
 
 import { Router } from 'express';
 
-import { ICertificateRepository } from '../repositories/interfaces/ICertificateRepository.js';
-import { INotificationRepository } from '../repositories/interfaces/INotificationRepository.js';
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
+import { PgCertificateRepository } from '../repositories/pg/PgCertificateRepository.js';
+import { PgNotificationRepository } from '../repositories/pg/PgNotificationRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
 import { CertificateService } from '../services/certificate.service.js';
 import { NotificationService } from '../services/notification.service.js';
 import { CertificateController } from '../controllers/certificate.controller.js';
@@ -37,14 +37,14 @@ import {
 } from '../validators/certificate.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const certRepo = new ICertificateRepository();
-const notificationRepo = new INotificationRepository();
+const certRepo = new PgCertificateRepository();
+const notificationRepo = new PgNotificationRepository();
 
 const notificationService = new NotificationService(notificationRepo);
 const certificateService = new CertificateService(certRepo, notificationService);
 const certificateController = new CertificateController(certificateService);
 
-const userRepo = new IUserRepository();
+const userRepo = new PgUserRepository();
 const authMiddleware = authenticate(userRepo);
 
 // ── Router ────────────────────────────────────────────────────────────────────

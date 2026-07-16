@@ -16,8 +16,8 @@
 
 import { Router } from 'express';
 
-import { IPaymentRepository } from '../../repositories/interfaces/IPaymentRepository.js';
-import { INotificationRepository } from '../../repositories/interfaces/INotificationRepository.js';
+import { PgPaymentRepository } from '../../repositories/pg/PgPaymentRepository.js';
+import { PgNotificationRepository } from '../../repositories/pg/PgNotificationRepository.js';
 import { PaymentService } from '../../services/payment.service.js';
 import { NotificationService } from '../../services/notification.service.js';
 import { PaymentController } from '../../controllers/payment.controller.js';
@@ -34,8 +34,8 @@ import {
 } from '../../validators/payment.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const paymentRepo = new IPaymentRepository();
-const notificationRepo = new INotificationRepository();
+const paymentRepo = new PgPaymentRepository();
+const notificationRepo = new PgNotificationRepository();
 
 const notificationService = new NotificationService(notificationRepo);
 const paymentService = new PaymentService(paymentRepo, notificationService);

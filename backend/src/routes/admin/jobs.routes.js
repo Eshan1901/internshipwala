@@ -18,7 +18,7 @@
 
 import { Router } from 'express';
 
-import { IJobRepository } from '../../repositories/interfaces/IJobRepository.js';
+import { PgJobRepository } from '../../repositories/pg/PgJobRepository.js';
 import { JobService } from '../../services/job.service.js';
 import { JobController } from '../../controllers/job.controller.js';
 import authorizePermission from '../../middlewares/authorizePermission.js';
@@ -35,7 +35,7 @@ import {
 } from '../../validators/job.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const jobRepo = new IJobRepository();
+const jobRepo = new PgJobRepository();
 const jobService = new JobService(jobRepo);
 const jobController = new JobController(jobService);
 

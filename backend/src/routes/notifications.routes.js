@@ -18,8 +18,8 @@
 
 import { Router } from 'express';
 
-import { INotificationRepository } from '../repositories/interfaces/INotificationRepository.js';
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
+import { PgNotificationRepository } from '../repositories/pg/PgNotificationRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
 import { NotificationService } from '../services/notification.service.js';
 import { NotificationController } from '../controllers/notification.controller.js';
 import authenticate from '../middlewares/authenticate.js';
@@ -32,12 +32,12 @@ import {
 } from '../validators/notification.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const notificationRepo = new INotificationRepository();
+const notificationRepo = new PgNotificationRepository();
 const notificationService = new NotificationService(notificationRepo);
 const notificationController = new NotificationController(notificationService);
 
 // authenticate requires a userRepo to resolve the JWT subject
-const userRepo = new IUserRepository();
+const userRepo = new PgUserRepository();
 const authMiddleware = authenticate(userRepo);
 
 // ── Router ────────────────────────────────────────────────────────────────────

@@ -10,9 +10,9 @@
 
 import { Router } from 'express';
 
-import { IPaymentRepository } from '../repositories/interfaces/IPaymentRepository.js';
-import { INotificationRepository } from '../repositories/interfaces/INotificationRepository.js';
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
+import { PgPaymentRepository } from '../repositories/pg/PgPaymentRepository.js';
+import { PgNotificationRepository } from '../repositories/pg/PgNotificationRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
 import { PaymentService } from '../services/payment.service.js';
 import { NotificationService } from '../services/notification.service.js';
 import { PaymentController } from '../controllers/payment.controller.js';
@@ -23,14 +23,14 @@ import asyncHandler from '../utils/asyncHandler.js';
 import { myPaymentsQuerySchema } from '../validators/payment.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const paymentRepo = new IPaymentRepository();
-const notificationRepo = new INotificationRepository();
+const paymentRepo = new PgPaymentRepository();
+const notificationRepo = new PgNotificationRepository();
 
 const notificationService = new NotificationService(notificationRepo);
 const paymentService = new PaymentService(paymentRepo, notificationService);
 const paymentController = new PaymentController(paymentService);
 
-const userRepo = new IUserRepository();
+const userRepo = new PgUserRepository();
 const authMiddleware = authenticate(userRepo);
 
 // ── Router ────────────────────────────────────────────────────────────────────

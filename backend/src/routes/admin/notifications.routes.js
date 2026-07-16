@@ -14,7 +14,7 @@
 
 import { Router } from 'express';
 
-import { INotificationRepository } from '../../repositories/interfaces/INotificationRepository.js';
+import { PgNotificationRepository } from '../../repositories/pg/PgNotificationRepository.js';
 import { NotificationService } from '../../services/notification.service.js';
 import { NotificationController } from '../../controllers/notification.controller.js';
 import authorizePermission from '../../middlewares/authorizePermission.js';
@@ -25,7 +25,7 @@ import { PERMISSIONS } from '../../constants/permissions.js';
 import { adminSendNotificationSchema } from '../../validators/notification.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const notificationRepo = new INotificationRepository();
+const notificationRepo = new PgNotificationRepository();
 const notificationService = new NotificationService(notificationRepo);
 const notificationController = new NotificationController(notificationService);
 

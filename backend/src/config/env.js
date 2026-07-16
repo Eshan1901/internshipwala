@@ -23,7 +23,7 @@ const envSchema = z.object({
   // ── Database ─────────────────────────────────────────────────────
   // Required in production; optional during early development phases
   // before the database developer delivers the connection string.
-  DATABASE_URL: z.string().optional(),
+  DATABASE_URL: z.string().min(1, 'DATABASE_URL is required for PostgreSQL connection'),
 
   // ── JWT ──────────────────────────────────────────────────────────
   STUDENT_JWT_SECRET: z.string().min(32).default('dev_student_secret_replace_in_production_env'),

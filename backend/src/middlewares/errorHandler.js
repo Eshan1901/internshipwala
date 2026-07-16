@@ -120,12 +120,12 @@ const errorHandler = (err, req, res, _next) => {
       method: req.method,
       url: req.originalUrl,
     });
-  } else {
     logger.warn('Client error', {
       statusCode: error.statusCode,
       message: error.message,
       method: req.method,
       url: req.originalUrl,
+      errors: error.errors,
     });
   }
 

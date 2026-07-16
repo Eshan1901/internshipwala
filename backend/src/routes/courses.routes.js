@@ -6,7 +6,7 @@
 
 import { Router } from 'express';
 
-import { MockCourseRepository } from '../repositories/mocks/MockCourseRepository.js';
+import { PgCourseRepository } from '../repositories/pg/PgCourseRepository.js';
 import { CourseService } from '../services/course.service.js';
 import { CourseController } from '../controllers/course.controller.js';
 import { validate } from '../middlewares/validate.js';
@@ -17,7 +17,7 @@ import {
   courseIdParamSchema,
 } from '../validators/course.validator.js';
 
-const courseRepo = new MockCourseRepository();
+const courseRepo = new PgCourseRepository();
 const courseService = new CourseService(courseRepo);
 const courseController = new CourseController(courseService);
 

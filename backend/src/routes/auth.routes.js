@@ -15,9 +15,9 @@
 
 import { Router } from 'express';
 
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
-import { IOtpRepository } from '../repositories/interfaces/IOtpRepository.js';
-import { IAdminRepository } from '../repositories/interfaces/IAdminRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
+import { PgOtpRepository } from '../repositories/pg/PgOtpRepository.js';
+import { PgAdminRepository } from '../repositories/pg/PgAdminRepository.js';
 
 import { AuthService } from '../services/auth.service.js';
 import { AuthController } from '../controllers/auth.controller.js';
@@ -39,9 +39,9 @@ import {
 
 // ── Dependency injection ──────────────────────────────────────────────────────
 // Concrete repository implementations will be swapped in here when delivered.
-const userRepo = new IUserRepository();
-const otpRepo = new IOtpRepository();
-const adminRepo = new IAdminRepository();
+const userRepo = new PgUserRepository();
+const otpRepo = new PgOtpRepository();
+const adminRepo = new PgAdminRepository();
 
 const authService = new AuthService(userRepo, otpRepo, adminRepo);
 const authController = new AuthController(authService);

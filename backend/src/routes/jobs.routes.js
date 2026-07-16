@@ -13,8 +13,8 @@
 
 import { Router } from 'express';
 
-import { IJobRepository } from '../repositories/interfaces/IJobRepository.js';
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
+import { PgJobRepository } from '../repositories/pg/PgJobRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
 import { JobService } from '../services/job.service.js';
 import { JobController } from '../controllers/job.controller.js';
 import authenticate from '../middlewares/authenticate.js';
@@ -28,11 +28,11 @@ import {
 } from '../validators/job.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const jobRepo = new IJobRepository();
+const jobRepo = new PgJobRepository();
 const jobService = new JobService(jobRepo);
 const jobController = new JobController(jobService);
 
-const userRepo = new IUserRepository();
+const userRepo = new PgUserRepository();
 const authMiddleware = authenticate(userRepo);
 
 // ── Router ────────────────────────────────────────────────────────────────────

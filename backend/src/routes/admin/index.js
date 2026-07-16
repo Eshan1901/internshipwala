@@ -15,8 +15,8 @@
 
 import { Router } from 'express';
 
-import { IAdminRepository } from '../../repositories/interfaces/IAdminRepository.js';
-import { IActivityLogRepository } from '../../repositories/interfaces/IActivityLogRepository.js';
+import { PgAdminRepository } from '../../repositories/pg/PgAdminRepository.js';
+import { PgActivityLogRepository } from '../../repositories/pg/PgActivityLogRepository.js';
 
 import { AdminService } from '../../services/admin.service.js';
 import { AdminController } from '../../controllers/admin.controller.js';
@@ -45,8 +45,8 @@ import {
 } from '../../validators/admin.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const adminRepo = new IAdminRepository();
-const activityLogRepo = new IActivityLogRepository();
+const adminRepo = new PgAdminRepository();
+const activityLogRepo = new PgActivityLogRepository();
 
 const adminService = new AdminService(adminRepo, activityLogRepo);
 const adminController = new AdminController(adminService);

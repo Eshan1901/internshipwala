@@ -15,7 +15,7 @@
 
 import { Router } from 'express';
 
-import { IUserRepository } from '../repositories/interfaces/IUserRepository.js';
+import { PgUserRepository } from '../repositories/pg/PgUserRepository.js';
 import { UserService } from '../services/user.service.js';
 import { UserController } from '../controllers/user.controller.js';
 import authenticate from '../middlewares/authenticate.js';
@@ -25,7 +25,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import { updateProfileSchema } from '../validators/user.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const userRepo = new IUserRepository();
+const userRepo = new PgUserRepository();
 const userService = new UserService(userRepo);
 const userController = new UserController(userService);
 

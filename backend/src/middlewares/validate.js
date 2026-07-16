@@ -38,12 +38,11 @@ export const validate = (schema, target = 'body') =>
     const result = schema.safeParse(req[target]);
 
     if (!result.success) {
-      // Map Zod issues to the standard { field, message } error shape
       const errors = result.error.issues.map((issue) => ({
         field: issue.path.join('.') || target,
         message: issue.message,
       }));
-
+      console.error('Validation failed for target:', target, JSON.stringify(errors, null, 2));
       return next(new AppError(400, MESSAGES.VALIDATION_FAILED, errors));
     }
 

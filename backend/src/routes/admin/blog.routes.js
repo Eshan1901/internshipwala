@@ -17,7 +17,7 @@
 
 import { Router } from 'express';
 
-import { IBlogRepository } from '../../repositories/interfaces/IBlogRepository.js';
+import { PgBlogRepository } from '../../repositories/pg/PgBlogRepository.js';
 import { BlogService } from '../../services/blog.service.js';
 import { BlogController } from '../../controllers/blog.controller.js';
 import authorizePermission from '../../middlewares/authorizePermission.js';
@@ -34,7 +34,7 @@ import {
 } from '../../validators/blog.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const blogRepo = new IBlogRepository();
+const blogRepo = new PgBlogRepository();
 const blogService = new BlogService(blogRepo);
 const blogController = new BlogController(blogService);
 

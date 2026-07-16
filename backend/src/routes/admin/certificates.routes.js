@@ -19,8 +19,8 @@
 
 import { Router } from 'express';
 
-import { ICertificateRepository } from '../../repositories/interfaces/ICertificateRepository.js';
-import { INotificationRepository } from '../../repositories/interfaces/INotificationRepository.js';
+import { PgCertificateRepository } from '../../repositories/pg/PgCertificateRepository.js';
+import { PgNotificationRepository } from '../../repositories/pg/PgNotificationRepository.js';
 import { CertificateService } from '../../services/certificate.service.js';
 import { NotificationService } from '../../services/notification.service.js';
 import { CertificateController } from '../../controllers/certificate.controller.js';
@@ -37,8 +37,8 @@ import {
 } from '../../validators/certificate.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const certRepo = new ICertificateRepository();
-const notificationRepo = new INotificationRepository();
+const certRepo = new PgCertificateRepository();
+const notificationRepo = new PgNotificationRepository();
 
 const notificationService = new NotificationService(notificationRepo);
 const certificateService = new CertificateService(certRepo, notificationService);

@@ -12,11 +12,11 @@
 
 import { Router } from 'express';
 
-import { IEnrollmentRepository } from '../../repositories/interfaces/IEnrollmentRepository.js';
-import { IModuleProgressRepository } from '../../repositories/interfaces/IModuleProgressRepository.js';
-import { INotificationRepository } from '../../repositories/interfaces/INotificationRepository.js';
-import { ICertificateRepository } from '../../repositories/interfaces/ICertificateRepository.js';
-import { MockCourseRepository } from '../../repositories/mocks/MockCourseRepository.js';
+import { PgEnrollmentRepository } from '../../repositories/pg/PgEnrollmentRepository.js';
+import { PgModuleProgressRepository } from '../../repositories/pg/PgModuleProgressRepository.js';
+import { PgNotificationRepository } from '../../repositories/pg/PgNotificationRepository.js';
+import { PgCertificateRepository } from '../../repositories/pg/PgCertificateRepository.js';
+import { PgCourseRepository } from '../../repositories/pg/PgCourseRepository.js';
 
 import { EnrollmentService } from '../../services/enrollment.service.js';
 import { NotificationService } from '../../services/notification.service.js';
@@ -31,11 +31,11 @@ import {
 } from '../../validators/enrollment.validator.js';
 
 // ── Dependency injection ──────────────────────────────────────────────────────
-const enrollmentRepo = new IEnrollmentRepository();
-const progressRepo = new IModuleProgressRepository();
-const courseRepo = new MockCourseRepository();
-const notificationRepo = new INotificationRepository();
-const certRepo = new ICertificateRepository();
+const enrollmentRepo = new PgEnrollmentRepository();
+const progressRepo = new PgModuleProgressRepository();
+const courseRepo = new PgCourseRepository();
+const notificationRepo = new PgNotificationRepository();
+const certRepo = new PgCertificateRepository();
 
 const notificationService = new NotificationService(notificationRepo);
 const certificateService = new CertificateService(certRepo, notificationService);
