@@ -3,7 +3,6 @@ import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import AuthLayout from '../../components/AuthLayout/AuthLayout';
 import authService from '../../services/authService';
 import { toast } from 'react-hot-toast';
-import { UserPlus } from 'lucide-react';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -66,104 +65,140 @@ export default function Register() {
         {/* Full Name */}
         <div className="form-group">
           <label className="form-label" htmlFor="register-full-name">Full Name</label>
-          <input
-            id="register-full-name"
-            type="text"
-            name="full_name"
-            required
-            placeholder="Jane Doe"
-            value={formData.full_name}
-            onChange={handleChange}
-            className="form-input"
-          />
+          <div className="auth-input-group">
+            <div className="auth-input-icon">
+              <span className="material-symbols-outlined">person</span>
+            </div>
+            <input
+              id="register-full-name"
+              type="text"
+              name="full_name"
+              required
+              placeholder="Jane Doe"
+              value={formData.full_name}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
         </div>
 
         {/* Email */}
         <div className="form-group">
           <label className="form-label" htmlFor="register-email">Email Address</label>
-          <input
-            id="register-email"
-            type="email"
-            name="email"
-            required
-            placeholder="jane@college.edu"
-            value={formData.email}
-            onChange={handleChange}
-            className="form-input"
-          />
+          <div className="auth-input-group">
+            <div className="auth-input-icon">
+              <span className="material-symbols-outlined">mail</span>
+            </div>
+            <input
+              id="register-email"
+              type="email"
+              name="email"
+              required
+              placeholder="jane@college.edu"
+              value={formData.email}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
         </div>
 
         {/* Mobile & Password Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div className="form-group">
             <label className="form-label" htmlFor="register-mobile">Mobile Number</label>
-            <input
-              id="register-mobile"
-              type="text"
-              name="mobile"
-              required
-              placeholder="9876543210"
-              value={formData.mobile}
-              onChange={handleChange}
-              className="form-input"
-            />
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">phone_iphone</span>
+              </div>
+              <input
+                id="register-mobile"
+                type="text"
+                name="mobile"
+                required
+                placeholder="9876543210"
+                value={formData.mobile}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="register-password">Password</label>
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">lock</span>
+              </div>
+              <input
+                id="register-password"
+                type="password"
+                name="password"
+                required
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* College Name */}
+        <div className="form-group">
+          <label className="form-label" htmlFor="register-college">College Name</label>
+          <div className="auth-input-group">
+            <div className="auth-input-icon">
+              <span className="material-symbols-outlined">domain</span>
+            </div>
             <input
-              id="register-password"
-              type="password"
-              name="password"
+              id="register-college"
+              type="text"
+              name="college_name"
               required
-              placeholder="••••••••"
-              value={formData.password}
+              placeholder="IIT Bombay"
+              value={formData.college_name}
               onChange={handleChange}
               className="form-input"
             />
           </div>
         </div>
 
-        {/* College & Course */}
-        <div className="form-group">
-          <label className="form-label" htmlFor="register-college">College Name</label>
-          <input
-            id="register-college"
-            type="text"
-            name="college_name"
-            required
-            placeholder="IIT Bombay"
-            value={formData.college_name}
-            onChange={handleChange}
-            className="form-input"
-          />
-        </div>
-
+        {/* Course & Year Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div className="form-group">
             <label className="form-label" htmlFor="register-course">Present Course</label>
-            <input
-              id="register-course"
-              type="text"
-              name="present_course"
-              required
-              placeholder="B.Tech CSE"
-              value={formData.present_course}
-              onChange={handleChange}
-              className="form-input"
-            />
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">menu_book</span>
+              </div>
+              <input
+                id="register-course"
+                type="text"
+                name="present_course"
+                required
+                placeholder="B.Tech CSE"
+                value={formData.present_course}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="register-year">Graduation Year</label>
-            <input
-              id="register-year"
-              type="text"
-              name="year_qualifying"
-              required
-              placeholder="2026"
-              value={formData.year_qualifying}
-              onChange={handleChange}
-              className="form-input"
-            />
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">calendar_today</span>
+              </div>
+              <input
+                id="register-year"
+                type="text"
+                name="year_qualifying"
+                required
+                placeholder="2026"
+                value={formData.year_qualifying}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
           </div>
         </div>
 
@@ -171,28 +206,38 @@ export default function Register() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div className="form-group">
             <label className="form-label" htmlFor="register-state">State</label>
-            <input
-              id="register-state"
-              type="text"
-              name="state"
-              required
-              placeholder="Maharashtra"
-              value={formData.state}
-              onChange={handleChange}
-              className="form-input"
-            />
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">location_on</span>
+              </div>
+              <input
+                id="register-state"
+                type="text"
+                name="state"
+                required
+                placeholder="Maharashtra"
+                value={formData.state}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="register-referral">Referral Code (Optional)</label>
-            <input
-              id="register-referral"
-              type="text"
-              name="referral_code"
-              placeholder="REF123"
-              value={formData.referral_code}
-              onChange={handleChange}
-              className="form-input"
-            />
+            <div className="auth-input-group">
+              <div className="auth-input-icon">
+                <span className="material-symbols-outlined">redeem</span>
+              </div>
+              <input
+                id="register-referral"
+                type="text"
+                name="referral_code"
+                placeholder="REF123"
+                value={formData.referral_code}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
           </div>
         </div>
 
@@ -207,7 +252,8 @@ export default function Register() {
             <div className="spinner spinner-sm" />
           ) : (
             <>
-              <UserPlus size={18} /> Register Account
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>person_add</span>
+              Register Account
             </>
           )}
         </button>

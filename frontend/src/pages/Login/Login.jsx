@@ -3,13 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AuthLayout from '../../components/AuthLayout/AuthLayout';
 import { toast } from 'react-hot-toast';
-import { LogIn } from 'lucide-react';
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,16 +40,21 @@ export default function Login() {
         {/* Email */}
         <div className="form-group">
           <label className="form-label" htmlFor="email-input">Email Address</label>
-          <input
-            id="email-input"
-            type="email"
-            name="email"
-            required
-            placeholder="name@college.edu"
-            value={formData.email}
-            onChange={handleChange}
-            className="form-input"
-          />
+          <div className="auth-input-group">
+            <div className="auth-input-icon">
+              <span className="material-symbols-outlined">mail</span>
+            </div>
+            <input
+              id="email-input"
+              type="email"
+              name="email"
+              required
+              placeholder="name@college.edu"
+              value={formData.email}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </div>
         </div>
 
         {/* Password */}
@@ -60,16 +65,31 @@ export default function Login() {
               Forgot?
             </Link>
           </div>
-          <input
-            id="password-input"
-            type="password"
-            name="password"
-            required
-            placeholder="••••••••"
-            value={formData.password}
-            onChange={handleChange}
-            className="form-input"
-          />
+          <div className="auth-input-group">
+            <div className="auth-input-icon">
+              <span className="material-symbols-outlined">lock</span>
+            </div>
+            <input
+              id="password-input"
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              required
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              className="form-input has-toggle"
+            />
+            <button
+              type="button"
+              className="auth-password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <span className="material-symbols-outlined">
+                {showPassword ? 'visibility_off' : 'visibility'}
+              </span>
+            </button>
+          </div>
         </div>
 
         <button
@@ -83,7 +103,8 @@ export default function Login() {
             <div className="spinner spinner-sm" />
           ) : (
             <>
-              <LogIn size={18} /> Sign In
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>login</span>
+              Sign In
             </>
           )}
         </button>

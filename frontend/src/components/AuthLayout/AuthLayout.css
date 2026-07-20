@@ -1,30 +1,53 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+   AuthLayout — Premium Split-Screen Auth (Stitch MCP Enhanced)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Container ─────────────────────────────────────────────────────────────── */
 .auth-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 7fr;
   min-height: 100vh;
   background: var(--bg-primary);
 }
 
-/* Info Left Panel */
+/* ── Left Info Panel ───────────────────────────────────────────────────────── */
 .auth-info-panel {
   position: relative;
-  background: linear-gradient(135deg, var(--bg-secondary), #0d0f22);
-  border-right: 1px solid var(--border-subtle);
+  background: linear-gradient(135deg, #0d0f22 0%, #1e293b 100%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4xl) var(--space-2xl);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
   overflow: hidden;
 }
 
-.auth-info-panel__glow {
+/* Grid pattern overlay */
+.auth-info-panel__grid {
   position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle, var(--color-primary-glow), transparent 70%);
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
+  opacity: 0.6;
+}
+
+/* WebGL shader canvas container */
+.auth-shader-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.auth-shader-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .auth-info-panel__content {
@@ -33,6 +56,7 @@
   z-index: 2;
 }
 
+/* ── Logo ──────────────────────────────────────────────────────────────────── */
 .auth-info-logo {
   display: flex;
   align-items: center;
@@ -40,81 +64,242 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--text-primary);
+  color: white;
   margin-bottom: var(--space-4xl);
 }
 
-.auth-info-logo svg {
-  color: var(--color-primary-light);
+.auth-info-logo__icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: var(--shadow-md);
 }
 
+.auth-info-logo__icon .material-symbols-outlined {
+  font-size: 22px;
+  font-variation-settings: 'FILL' 1;
+}
+
+/* ── Gradient text ─────────────────────────────────────────────────────────── */
+.auth-gradient-text {
+  background: linear-gradient(135deg, #9cf2e8, #80d5cb, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Headline ──────────────────────────────────────────────────────────────── */
 .auth-info-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.2;
   margin-bottom: var(--space-3xl);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: white;
 }
 
+/* ── Glassmorphic benefit cards ────────────────────────────────────────────── */
 .auth-benefits {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
+  gap: var(--space-lg);
 }
 
 .auth-benefit {
   display: flex;
   gap: var(--space-md);
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform var(--transition-base);
 }
 
-.benefit-icon {
-  color: var(--color-primary-light);
+.auth-benefit:hover {
+  transform: translateY(-4px);
+}
+
+.benefit-icon-wrap {
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
+}
+
+.benefit-icon-wrap .material-symbols-outlined {
+  color: #80d5cb;
+  font-size: 24px;
+  font-variation-settings: 'FILL' 1;
 }
 
 .auth-benefit h4 {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: var(--space-xs);
+  color: white;
 }
 
 .auth-benefit p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.875rem;
+  color: #94a3b8;
   line-height: 1.5;
 }
 
-/* Form Right Panel */
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+.auth-info-footer {
+  position: relative;
+  z-index: 2;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  padding-top: var(--space-2xl);
+}
+
+/* ── Right Form Panel ──────────────────────────────────────────────────────── */
 .auth-form-panel {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-2xl);
+  background: var(--bg-primary);
+  overflow-y: auto;
 }
 
 .auth-form-card {
   width: 100%;
-  max-width: 440px;
-  padding: var(--space-2xl);
-  box-shadow: var(--shadow-xl);
+  max-width: 460px;
+  padding: 2.5rem;
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 1rem;
+  box-shadow:
+    0 2px 4px rgba(15, 118, 110, 0.05),
+    0 10px 25px rgba(0, 0, 0, 0.03);
 }
 
 .auth-form-header {
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  text-align: center;
 }
 
 .auth-title {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: var(--space-xs);
+  color: var(--text-primary);
 }
 
 .auth-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
 }
 
+/* ── Input fields with icons ───────────────────────────────────────────────── */
+.auth-input-group {
+  position: relative;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #94a3b8;
+  transition: color var(--transition-fast);
+  z-index: 1;
+}
+
+.auth-input-icon .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.auth-input-group:focus-within .auth-input-icon {
+  color: var(--color-primary);
+}
+
+.auth-input-group .form-input {
+  padding-left: 2.75rem;
+}
+
+/* Password visibility toggle */
+.auth-password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  transition: color var(--transition-fast);
+  z-index: 1;
+}
+
+.auth-password-toggle:hover {
+  color: var(--text-primary);
+}
+
+.auth-password-toggle .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.auth-input-group .form-input.has-toggle {
+  padding-right: 2.75rem;
+}
+
+/* Override form-input focus for auth pages — teal ring */
+.auth-form-card .form-input:focus {
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+}
+
+/* ── Mobile branding (visible only on small screens) ───────────────────────── */
+.auth-mobile-brand {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.auth-mobile-brand__icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.auth-mobile-brand__icon .material-symbols-outlined {
+  font-size: 20px;
+  font-variation-settings: 'FILL' 1;
+}
+
+.auth-mobile-brand__text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+}
+
+.auth-mobile-brand__text span {
+  color: var(--color-primary);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .auth-container {
     grid-template-columns: 1fr;
@@ -127,4 +312,28 @@
   .auth-form-panel {
     padding: var(--space-lg) var(--space-md);
   }
+
+  .auth-form-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-mobile-brand {
+    display: flex;
+  }
+}
+
+/* ── Scale-in animation for form card ──────────────────────────────────────── */
+@keyframes auth-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scale-in {
+  animation: auth-scale-in 0.5s ease-out forwards;
 }
