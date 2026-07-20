@@ -89,7 +89,7 @@
 
   /* Layout */
   --container-max: 1200px;
-  --navbar-height: 80px;
+  --navbar-height: 110px;
 }
 
 /* ── Reset & Base ──────────────────────────────────────────────────────────── */
@@ -165,6 +165,20 @@ p {
 
 .section {
   padding: var(--space-4xl) 0;
+}
+
+/* Ensure main public pages clear the fixed navbar height */
+.courses-page,
+.course-detail-page,
+.jobs-page,
+.job-detail-page,
+.payments-page,
+.enrollments-page,
+.certificates-page,
+.blog-page,
+.blog-post-page,
+.dashboard-page {
+  padding-top: calc(var(--navbar-height) + var(--space-xl)) !important;
 }
 
 .section-title {
@@ -461,3 +475,96 @@ p {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.6rem; }
 }
+
+/* ── Floating Widgets & Overlays ───────────────────────────────────────────── */
+.floating-widgets-container {
+  position: fixed;
+  right: 0;
+  top: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.floating-widget-btn {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: white;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+}
+
+.floating-widget-btn:hover {
+  transform: translateX(-4px);
+}
+
+.floating-widget-btn--industrial {
+  background-color: #000000;
+  border-left: 2px solid #00E5FF;
+}
+
+.floating-widget-btn--industrial .badge-text-new {
+  color: #00E5FF;
+  font-weight: 900;
+  margin-bottom: 4px;
+  text-shadow: 0 0 4px rgba(0, 229, 255, 0.4);
+}
+
+.floating-widget-btn--beu {
+  background-color: #7C3AED; /* Purple */
+}
+
+/* Floating WhatsApp button */
+.floating-whatsapp {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.floating-whatsapp svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Hide floating side widgets on very small screens to avoid UI overlap */
+@media (max-width: 640px) {
+  .floating-widgets-container {
+    display: none;
+  }
+}
+
